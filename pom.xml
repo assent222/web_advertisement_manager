@@ -3,9 +3,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>pkk.interview</groupId>
-    <artifactId>WebАdvertisementManager</artifactId>
+    <artifactId>web-advertisement-manager</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <packaging>jar</packaging>
+    <modules>
+        <module>web</module>
+    </modules>
+    <packaging>pom</packaging>
 
     <name>WebАdvertisementManager</name>
     <url>http://maven.apache.org</url>
@@ -15,7 +18,6 @@
     </properties>
 
     <dependencies>
-
         <!--SLF4J api-->
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -44,7 +46,6 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-
 
     <build>
         <finalName>${project.artifactId}</finalName>
