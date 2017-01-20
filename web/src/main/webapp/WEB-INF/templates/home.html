@@ -2,14 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="_csrf" th:content="${_csrf.token}"/>
-    <!-- default header name is X-CSRF-TOKEN -->
-    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
 
     <script src="./public/dist/json2.js"></script>
     <script src="./public/dist/jquery/1.11.3/jquery.js"></script>
     <!--<script src="./public/dist/jquery/plugins/coocies/2.1.3/js.coocies.js"></script>-->
 
+    <!-- add CSRF support for ajax -->
+    <!-- default header name is X-CSRF-TOKEN -->
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
     <script type="text/javascript">
         $(function () {
             $.ajaxPrefilter(function (options, originalOptions, xhr) {
@@ -28,6 +29,8 @@
 </form>
 
 <input type="submit" id="echo" value="echo"/>
+<input type="submit" id="get_json" value="get_json"/>
+
 
 <script type="text/javascript">
     $(function () {
@@ -35,11 +38,23 @@
             name: 'egor',
             age: 27
         };
+
         $('#echo').click(function () {
-            $.getJSON("ajax/echo", {data: user } )
-                .done(function (data) {
-                    alert(JSON.stringify(data));
-                });
+            $.ajax({
+                type: 'post',
+                url: 'http://localhost:8080/test/ajax/echo',
+                data: JSON.stringify(user),
+                contentType: "application/json; charset=utf-8",
+            }).done(function (data) {
+                alert(JSON.stringify(data));
+            });
+        });
+
+
+        $('#get_json').click(function () {
+            $.getJSON('http://localhost:8080/test/ajax/get_json').done(function (data) {
+                alert(JSON.stringify(data));
+            });
         });
     });
 </script>
