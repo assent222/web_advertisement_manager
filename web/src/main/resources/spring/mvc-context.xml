@@ -13,7 +13,7 @@
 
     <!--Включаем поддержку статических файлов-->
     <mvc:default-servlet-handler/>
-    <mvc:resources location="/WEB-INF/dist/" mapping="/dist/**"/>
+    <mvc:resources location="/WEB-INF/public/" mapping="/public/**"/>
 
     <!--JSP-->
     <!--<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"-->
