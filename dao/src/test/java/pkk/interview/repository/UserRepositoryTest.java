@@ -43,7 +43,7 @@ public class UserRepositoryTest {
 
     @BeforeClass
     public static void setUpClass() throws IOException {
-        log.debug(">> setUpClass");
+        log.info(">> setUpClass");
         File db = new File("./hsqldb");
         if (db.exists()) {
             FileUtils.deleteDirectory(db);
@@ -51,7 +51,7 @@ public class UserRepositoryTest {
         if (db.exists()) {
             throw new IllegalStateException();
         }
-        log.debug("<< setUpClass");
+        log.info("<< setUpClass");
     }
 
 
@@ -59,7 +59,7 @@ public class UserRepositoryTest {
     @Transactional
     @Rollback(false)
     public void setUp() throws Exception {
-        log.debug(">> setUp");
+        log.info(">> setUp");
 
         for (int i = 0; i < 10; i++) {
             User entity = new User();
@@ -70,17 +70,17 @@ public class UserRepositoryTest {
             manager.merge(entity);
         }
 
-        log.debug("<< setUp");
+        log.info("<< setUp");
     }
 
     @Test
     @Transactional
     @Rollback(false)
     public void testCount() {
-        log.debug(">> testCount");
+        log.info(">> testCount");
         List<User> all = (List<User>) userRepository.findAll();
-        log.debug("## userList = {}"+ Arrays.toString(all.toArray()));
+        log.info("## userList = {}"+ Arrays.toString(all.toArray()));
         Assert.assertEquals(10, all.size());
-        log.debug("<< testCount");
+        log.info("<< testCount");
     }
 }

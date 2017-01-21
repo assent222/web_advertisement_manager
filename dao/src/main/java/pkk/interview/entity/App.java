@@ -18,14 +18,15 @@ public class App extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private AppType type;
 
-    @Column
-    @Enumerated
-    @ElementCollection(targetClass = ContetnType.class)
-    private List<ContetnType> contetnTypes;
-
     @OneToOne
     @JoinColumn(name = "USER_ID")
     private User user;
+
+    @Column(name = "CONTETN_TYPE")
+    @JoinTable(name = "APP_CONTETN_TYPE")
+    @Enumerated(EnumType.STRING)
+    @ElementCollection(targetClass = ContetnType.class)
+    private List<ContetnType> contetnTypes;
 
     public String getName() {
         return name;

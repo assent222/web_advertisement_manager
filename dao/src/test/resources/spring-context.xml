@@ -3,6 +3,8 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:jpa="http://www.springframework.org/schema/data/jpa"
        xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:p="http://www.springframework.org/schema/p"
        xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="
      http://www.springframework.org/schema/beans
@@ -13,10 +15,11 @@
      http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
      http://www.springframework.org/schema/tx
      http://www.springframework.org/schema/tx/spring-tx.xsd
+     http://www.springframework.org/schema/util
+     http://www.springframework.org/schema/util/spring-util.xsd
      ">
 
     <context:property-placeholder location="classpath:jdbc.properties"/>
-
     <jpa:repositories base-package="pkk.interview.repository"/>
     <!--<context:component-scan base-package="lab.jpa.hibernate.entity" />-->
 
@@ -27,37 +30,45 @@
             <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
         </property>
         <property name="jpaProperties">
-            <props>
-                <prop key="hibernate.show_sql">true</prop>
-                <prop key="hibernate.format_sql">true</prop>
-                <prop key="hibernate.dialect">org.hibernate.dialect.HSQLDialect</prop>
-                <prop key="hibernate.hbm2ddl.auto">create</prop>
-            </props>
+            <util:properties location="classpath:hibernate.properties"/>
         </property>
     </bean>
 
     <!-- Connection pool DS-->
-    <bean id="dataSource" class = "com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
-        <property name="driverClass" value="${jdbc.driverClassName}" />
-        <property name="jdbcUrl" value="${jdbc.url}" />
-        <property name="user" value="${jdbc.username}" />
-        <property name="password" value="${jdbc.password}" />
+    <!--<bean id="dataSource" class = "com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">-->
+        <!--<property name="driverClass" value="${jdbc.driverClassName}" />-->
+        <!--<property name="jdbcUrl" value="${jdbc.url}" />-->
+        <!--<property name="user" value="${jdbc.username}" />-->
+        <!--<property name="password" value="${jdbc.password}" />-->
 
-        <!--C3P0 properties-->
-        <property name="acquireIncrement" value="${c3p0.acquireIncrement}" />
-        <property name="initialPoolSize" value="${c3p0.initialPoolSize}" />
-        <property name="maxPoolSize" value="${c3p0.maxPoolSize}" />
-        <property name="minPoolSize" value="${c3p0.minPoolSize}" />
-        <property name="maxStatements" value="${c3p0.maxStatements}" />
-    </bean>
+        <!--&lt;!&ndash;C3P0 properties&ndash;&gt;-->
+        <!--<property name="acquireIncrement" value="${c3p0.acquireIncrement}" />-->
+        <!--<property name="initialPoolSize" value="${c3p0.initialPoolSize}" />-->
+        <!--<property name="maxPoolSize" value="${c3p0.maxPoolSize}" />-->
+        <!--<property name="minPoolSize" value="${c3p0.minPoolSize}" />-->
+        <!--<property name="maxStatements" value="${c3p0.maxStatements}" />-->
+    <!--</bean>-->
+
+    <!--do not use this bean due to you can configure log4jdbc throw driverClassName and log4jdbc.properties-->
+    <!--<bean id="dataSource" class="net.sf.log4jdbc.Log4jdbcProxyDataSource" >-->
+        <!--<constructor-arg ref="_dataSource" />-->
+        <!--<property name="logFormatter">-->
+            <!--<bean class="net.sf.log4jdbc.tools.Log4JdbcCustomFormatter" >-->
+                <!--<property name="loggingType" value="SINGLE_LINE" />-->
+                <!--&lt;!&ndash;<property name="margin" value="19" />&ndash;&gt;-->
+                <!--<property name="sqlPrefix" value="SQL:::" />-->
+            <!--</bean>-->
+        <!--</property>-->
+    <!--</bean >-->
+
 
     <!--Simple DS-->
-    <!--<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">-->
-        <!--<property name="driverClassName" value="${jdbc.driverClassName}"/>-->
-        <!--<property name="url" value="${jdbc.url}"/>-->
-        <!--<property name="username" value="${jdbc.username}"/>-->
-        <!--<property name="password" value="${jdbc.password}"/>-->
-    <!--</bean>-->
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="${jdbc.driverClassName}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+    </bean>
 
     <!--ENABLE TRANSACTIONS-->
     <tx:annotation-driven/>

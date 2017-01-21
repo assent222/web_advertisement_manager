@@ -86,5 +86,33 @@
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-entitymanager</artifactId>
         </dependency>
+
+        <!--LOG4JDBC-->
+        <!--http://blog.jhades.org/logging-the-actualreal-sql-queries-of-a-springhibernate-application/-->
+        <dependency>
+            <groupId>org.lazyluke</groupId>
+            <artifactId>log4jdbc-remix</artifactId>
+        </dependency>
+
+        <!--<dependency>-->
+            <!--<groupId>com.googlecode.log4jdbc</groupId>-->
+            <!--<artifactId>log4jdbc</artifactId>-->
+        <!--</dependency>-->
+
+        <!--<dependency>-->
+            <!--<groupId>com.github.marcosemiao.log4jdbc</groupId>-->
+            <!--<artifactId>log4jdbc</artifactId>-->
+            <!--<version>0.2.0</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>com.github.marcosemiao.log4jdbc</groupId>-->
+            <!--<artifactId>log4jdbc-marshaller</artifactId>-->
+            <!--<version>0.2.0</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>com.github.marcosemiao.log4jdbc</groupId>-->
+            <!--<artifactId>log4jdbc-marshaller</artifactId>-->
+            <!--<version>0.2.0</version>-->
+        <!--</dependency>-->
     </dependencies>
 </project>
