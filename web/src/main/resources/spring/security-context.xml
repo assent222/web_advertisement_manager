@@ -16,8 +16,6 @@
 
     <http pattern="/public/**" security="none"/>
 
-
-
     <!--if you will apply security="none" then no csrf token will be generated. page will not pass through security filter. Use role ANONYMOUS.-->
     <!--<http pattern="/login" security="none"/>-->
 
@@ -53,6 +51,8 @@
     <!--</authentication-manager>-->
 
     <!--USER-SERVICE CUSTOM IMPLEMENTATION-->
+    <!--ROLE_ prefix required in SpringSecurity-->
+    <!--http://stackoverflow.com/questions/11539162/why-does-spring-securitys-rolevoter-need-a-prefix-->
     <authentication-manager>
         <authentication-provider user-service-ref='myUserDetailsService'/>
     </authentication-manager>
