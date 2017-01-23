@@ -1,6 +1,6 @@
 package pkk.interview.entity;
 
-import pkk.interview.entity.base.NamedEntity;
+import pkk.interview.entity.base.BaseEntity;
 
 import javax.persistence.*;
 import java.util.List;
@@ -11,7 +11,10 @@ import java.util.List;
 
 @Entity
 @Table(name = "APP")
-public class App extends NamedEntity {
+public class App extends BaseEntity {
+
+    @Column(name = "APP_NAME", nullable = false)
+    private String name;
 
     @Column(name = "APP_TYPE", nullable = false)
     @Enumerated(EnumType.STRING)
@@ -26,6 +29,14 @@ public class App extends NamedEntity {
     @Enumerated(EnumType.STRING)
     @ElementCollection(targetClass = ContetnType.class)
     private List<ContetnType> contetnTypes;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public AppType getType() {
         return type;
