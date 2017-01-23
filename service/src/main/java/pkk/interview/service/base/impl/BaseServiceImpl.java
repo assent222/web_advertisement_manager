@@ -1,10 +1,11 @@
 package pkk.interview.service.base.impl;
 
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.transaction.annotation.Transactional;
-import pkk.interview.service.exception.ServiceException;
-import pkk.interview.service.base.BaseService;
 import pkk.interview.entity.base.BaseEntity;
-import pkk.interview.repository.base.BaseRepository;
+import pkk.interview.service.base.BaseService;
+import pkk.interview.service.exception.ServiceException;
+
 
 import java.util.Collections;
 import java.util.List;
@@ -15,15 +16,15 @@ import java.util.List;
 
 public abstract class BaseServiceImpl<T extends BaseEntity> implements BaseService<T> {
 
-    private BaseRepository<T> repository;
+    private CrudRepository<T, Integer> repository;
 
-    public BaseServiceImpl(BaseRepository<T> repository) {
+    public BaseServiceImpl(CrudRepository<T, Integer> repository) {
         this.repository = repository;
     }
 
     @Override
     @Transactional(readOnly = true)
-    public T find(Integer id) {
+    public T findAll(Integer id) {
         try {
             return repository.findOne(id);
         } catch (Exception e) {
@@ -33,7 +34,7 @@ public abstract class BaseServiceImpl<T extends BaseEntity> implements BaseServi
 
     @Override
     @Transactional(readOnly = true)
-    public List<T> find() {
+    public List<T> findAll() {
         Iterable<T> entities;
         try {
             entities = repository.findAll();

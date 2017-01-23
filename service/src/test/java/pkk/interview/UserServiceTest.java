@@ -14,7 +14,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import pkk.interview.entity.User;
 import pkk.interview.entity.UserRole;
-import pkk.interview.repository.UserRepository;
+import pkk.interview.service.UserService;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -23,8 +23,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by root on 23.01.2017.
@@ -39,7 +37,7 @@ public class UserServiceTest {
     private EntityManager manager;
 
     @Autowired
-    private UserRepository userRepository;
+    private UserService userService;
 
     @BeforeClass
     public static void setUpClass() throws IOException {
@@ -78,7 +76,7 @@ public class UserServiceTest {
     @Rollback(false)
     public void testCount() {
         log.info(">> testCount");
-        List<User> all = (List<User>) userRepository.findAll();
+        List<User> all = (List<User>) userService.findAll();
         log.info("## userList = {}"+ Arrays.toString(all.toArray()));
         Assert.assertEquals(10, all.size());
         log.info("<< testCount");
