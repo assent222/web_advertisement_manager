@@ -65,7 +65,7 @@ public class App extends BaseEntity {
     @Override
     public String toString() {
         return "App{" +
-                "id=" + id +
+                "id=" + super.getId() +
                 ", name='" + name + '\'' +
                 ", type=" + type +
                 ", contetnTypes=" + contetnTypes +

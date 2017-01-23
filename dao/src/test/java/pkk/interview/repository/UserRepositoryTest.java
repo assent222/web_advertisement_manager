@@ -71,7 +71,6 @@ public class UserRepositoryTest {
             entity.setRole(UserRole.values()[i % 3]);
             entity.setLogin("LOG_" + i);
             entity.setPassword("PASS" + i);
-//            entity.setPassword("qwer" + i);
             manager.merge(entity);
         }
 

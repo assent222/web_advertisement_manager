@@ -10,4 +10,6 @@ import pkk.interview.entity.UserSecurity;
 
 @Repository
 public interface UserSecurityRepository extends CrudRepository<UserSecurity, Integer>{
+
+    UserSecurity findUserSecurityByLogin(String login);
 }

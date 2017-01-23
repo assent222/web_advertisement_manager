@@ -24,7 +24,7 @@ public abstract class BaseServiceImpl<T extends BaseEntity> implements BaseServi
 
     @Override
     @Transactional(readOnly = true)
-    public T findAll(Integer id) {
+    public T find(Integer id) {
         try {
             return repository.findOne(id);
         } catch (Exception e) {

@@ -16,11 +16,11 @@ public interface UserRepository extends CrudRepository<User, Integer> {
 
 
     @Override
-    @Query(value = "SELECT * FROM User U", nativeQuery = true)
+//    @Query(value = "SELECT * FROM User U", nativeQuery = true)
     Iterable<User> findAll();
 
 
     @Override
-    @Query(value = "SELECT * FROM User WHERE ID = ?1", nativeQuery = true)
+//    @Query(value = "SELECT * FROM User WHERE ID = ?1", nativeQuery = true)
     User findOne(Integer integer);
 }

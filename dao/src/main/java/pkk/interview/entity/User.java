@@ -10,7 +10,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "USER")
-@Inheritance(strategy=InheritanceType.JOINED)
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 public class User extends BaseEntity {
 
     @Column(name = "USER_NAME", nullable = false)
@@ -18,10 +18,6 @@ public class User extends BaseEntity {
 
     @Column(name = "USER_MAIL", nullable = false, unique = true)
     private String email;
-
-    @Column(name = "USER_ROLE", nullable = false)
-    @Enumerated(EnumType.STRING)
-    private UserRole role;
 
     public String getName() {
         return name;
@@ -39,21 +35,13 @@ public class User extends BaseEntity {
         this.email = email;
     }
 
-    public UserRole getRole() {
-        return role;
-    }
-
-    public void setRole(UserRole role) {
-        this.role = role;
-    }
 
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
+                "id=" + super.getId() +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
-                ", role=" + role +
                 '}';
     }
 }

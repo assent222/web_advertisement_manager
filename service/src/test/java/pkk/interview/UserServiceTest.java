@@ -63,7 +63,7 @@ public class UserServiceTest {
             User entity = new User();
             entity.setName("U" + i);
             entity.setEmail("U" + i + "@gmail.com");
-            entity.setRole(UserRole.values()[i % 3]);
+//            entity.setRole(UserRole.values()[i % 3]);
 //            entity.setPassword("qwer" + i);
             manager.merge(entity);
         }
