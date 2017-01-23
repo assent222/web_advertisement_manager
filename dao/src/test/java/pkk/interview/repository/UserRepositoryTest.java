@@ -14,6 +14,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import pkk.interview.entity.User;
 import pkk.interview.entity.UserRole;
+import pkk.interview.entity.UserSecurity;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -40,6 +41,8 @@ public class UserRepositoryTest {
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private UserSecurityRepository userSecurityRepository;
 
     @BeforeClass
     public static void setUpClass() throws IOException {
@@ -62,10 +65,12 @@ public class UserRepositoryTest {
         log.info(">> setUp");
 
         for (int i = 0; i < 10; i++) {
-            User entity = new User();
+            UserSecurity entity = new UserSecurity();
             entity.setName("U" + i);
             entity.setEmail("U" + i + "@gmail.com");
             entity.setRole(UserRole.values()[i % 3]);
+            entity.setLogin("LOG_" + i);
+            entity.setPassword("PASS" + i);
 //            entity.setPassword("qwer" + i);
             manager.merge(entity);
         }
@@ -82,5 +87,17 @@ public class UserRepositoryTest {
         log.info("## userList = {}"+ Arrays.toString(all.toArray()));
         Assert.assertEquals(10, all.size());
         log.info("<< testCount");
+    }
+    @Test
+    @Transactional
+    @Rollback(false)
+    public void testUpdate() {
+        log.info(">> testUpdate");
+        User entity = userRepository.findOne(1);
+        entity.setName("Egor");
+        userRepository.save(entity);
+        System.out.println(userSecurityRepository.findOne(1));
+//        userSecurityRepository.findAll();
+        log.info("<< testUpdate");
     }
 }
