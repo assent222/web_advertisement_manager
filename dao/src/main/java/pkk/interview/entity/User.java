@@ -1,5 +1,7 @@
 package pkk.interview.entity;
 
+import pkk.interview.entity.base.NamedEntity;
+
 import javax.persistence.*;
 
 /**
@@ -8,10 +10,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "USER")
-public class User extends BaseEntity {
-
-    @Column(name = "USER_NAME", nullable = false)
-    private String name;
+public class User extends NamedEntity {
 
     @Column(name = "USER_MAIL", nullable = false)
     private String email;
@@ -19,14 +18,6 @@ public class User extends BaseEntity {
     @Column(name = "USER_ROLE", nullable = false)
     @Enumerated(EnumType.STRING)
     private UserRole role;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public String getEmail() {
         return email;
