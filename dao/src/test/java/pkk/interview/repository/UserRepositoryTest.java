@@ -1,10 +1,7 @@
 package pkk.interview.repository;
 
 import org.apache.commons.io.FileUtils;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.*;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -71,10 +68,21 @@ public class UserRepositoryTest {
             entity.setRole(UserRole.values()[i % 3]);
             entity.setLogin("LOG_" + i);
             entity.setPassword("PASS" + i);
-            manager.merge(entity);
+            manager.persist(entity);
         }
 
         log.info("<< setUp");
+    }
+
+    @After
+    @Transactional
+    @Rollback(false)
+    public void setDown() throws Exception {
+        log.info(">> setDown");
+
+        userRepository.deleteAll();
+
+        log.info("<< setDown");
     }
 
     @Test
@@ -87,13 +95,16 @@ public class UserRepositoryTest {
         Assert.assertEquals(10, all.size());
         log.info("<< testCount");
     }
+
     @Test
+    @Ignore
     @Transactional
     @Rollback(false)
     public void testUpdate() {
         log.info(">> testUpdate");
-        User entity = userRepository.findOne(1);
+        User entity = userRepository.findOne(11);
         entity.setName("Egor");
+        System.out.println(entity);
         userRepository.save(entity);
         System.out.println(userSecurityRepository.findOne(1));
 //        userSecurityRepository.findAll();

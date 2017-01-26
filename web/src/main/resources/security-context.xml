@@ -23,7 +23,7 @@
             disable-url-rewriting="true"
             use-expressions="true">
         <intercept-url pattern="/login" access="hasRole('ROLE_ANONYMOUS')" />
-        <intercept-url pattern="/**" access="hasRole('ADMIN')" />
+        <intercept-url pattern="/pkk/interview/repository" access="hasRole('ADMIN')" />
         <form-login login-page='/login'
                     default-target-url='/home.html'
                     authentication-failure-url="/login?error"

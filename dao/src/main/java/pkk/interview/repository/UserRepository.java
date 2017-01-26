@@ -2,6 +2,7 @@ package pkk.interview.repository;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.rest.core.annotation.RestResource;
 import org.springframework.stereotype.Repository;
 import pkk.interview.entity.User;
 
@@ -12,6 +13,7 @@ import javax.persistence.NamedQuery;
  */
 
 @Repository
+@RestResource(exported = false)
 public interface UserRepository extends CrudRepository<User, Integer> {
 
 
