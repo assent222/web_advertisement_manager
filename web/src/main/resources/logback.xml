@@ -9,6 +9,14 @@
         <appender-ref ref="STDOUT"/>
     </root>
 
+    <!--HIBERNATE-->
+    <logger name="org.hibernate.SQL" additivity="false"> <!--set to 'debug' to see the generated queries -->
+        <level value="info" />
+    </logger>
+    <logger name="org.hibernate.type" additivity="false"> <!--set to 'trace' to see the values of parameters in SQL queries -->
+        <level value="info" />
+    </logger>
+
     <!--LOG4JDBC-->
     <logger name="jdbc.sqltiming" additivity ="true">
         <level value="info" />
