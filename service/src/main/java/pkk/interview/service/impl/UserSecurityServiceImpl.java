@@ -3,6 +3,8 @@ package pkk.interview.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import pkk.interview.entity.User;
 import pkk.interview.entity.UserSecurity;
@@ -28,7 +30,7 @@ public class UserSecurityServiceImpl extends BaseServiceImpl<UserSecurity> imple
     }
 
     @Override
-    @Transactional(readOnly = true)
+    @Transactional(readOnly = true, isolation = Isolation.REPEATABLE_READ)
     public UserSecurity findUserSecurityByLogin(String login) {
         try {
             return repository.findUserSecurityByLogin(login);

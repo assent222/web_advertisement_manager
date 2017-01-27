@@ -12,8 +12,10 @@ import java.util.List;
 @Transactional
 public interface BaseService<T extends BaseEntity> {
 
+    @Transactional(Transactional.TxType.SUPPORTS)
     T find(Integer id);
 
+    @Transactional(Transactional.TxType.SUPPORTS)
     List<T> findAll();
 
     T create(T entity);

@@ -2,14 +2,24 @@
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <!-- encoders are assigned the type ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
         <encoder>
-            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{100} - %msg%n</pattern>
+            <!--<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{100} - %msg%n</pattern>-->
             <!--<pattern>%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n</pattern>-->
+            <pattern><![CDATA[%d{dd.MM.yyyy HH:mm:ss,SSS} <%p> [%t] <%C{1}.%M(%L)> | %m%n]]></pattern>
         </encoder>
     </appender>
 
     <root level="info">
         <appender-ref ref="STDOUT"/>
     </root>
+
+
+    <!--LOG HIBERNATE-->
+    <logger name="org.hibernate.SQL" additivity="false"> <!--set to 'debug' to see the generated queries -->
+        <level value="info" />
+    </logger>
+    <logger name="org.hibernate.type" additivity="false"> <!--set to 'trace' to see the values of parameters in SQL queries -->
+        <level value="info" />
+    </logger>
 
     <!--LOG4JDBC-->
     <logger name="jdbc.sqltiming" additivity ="true">

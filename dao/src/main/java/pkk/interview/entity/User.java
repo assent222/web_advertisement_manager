@@ -35,7 +35,6 @@ public class User extends BaseEntity {
         this.email = email;
     }
 
-
     @Override
     public String toString() {
         return "User{" +
